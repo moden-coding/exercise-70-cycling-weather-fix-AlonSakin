@@ -34,9 +34,12 @@ def split_date_continues():
 
 def cycling_weather():
     df = split_date_continues()
+    weather = pd.read_csv("src/kumpula-weather-2017.csv")
+
+    return pd.merge(df, weather, left_on=["Year", "Month", "Day"], right_on=["Year", "m", "d"]).drop(["m", "d", "Time", "Time zone"], axis=1)
 
 def main():
-    cycling_weather()
+    print(cycling_weather())
 
 if __name__ == "__main__":
     main()
